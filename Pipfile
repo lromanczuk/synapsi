@@ -11,6 +11,7 @@ python-dotenv = "*"
 pytest = "*"
 fastapi = "*"
 hypercorn = "*"
+requests = "*"
 
 [requires]
 python_version = "3.9"

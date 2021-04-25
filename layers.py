@@ -2,6 +2,10 @@ import os
 from cryptography.fernet import Fernet
 
 
+# This function can be used in two ways. 
+# To encode or decode a string
+# For it to work properly you will need an env variable named SHIFT
+# It will decide how much to "move" the unicode string to "left or right"
 def caesar(old_str, method='encrypt'):
     shift = int(os.environ.get('SHIFT'))  
     if method=='decrypt':
@@ -15,8 +19,12 @@ def caesar(old_str, method='encrypt'):
     return new_str
 
 
+# This function can be used in two ways. 
+# To encode or decode a string
+# For it to work properly you will need an env variable named KEY
+# The KEY must be compatible with Fernet
 def crypto(old_str, method='encrypt'):
-    key = b'JriDryy8jgLxrkUNuivnvCBUGRHt6oUeN8ltlRxyfok=' # it should be spelled otherwise e.g like shift i think
+    key = os.environ.get('KEY').encode('utf-8')
     f = Fernet(key)
     if method=='decrypt':
         token = f.decrypt(old_str.encode('utf-8'))
